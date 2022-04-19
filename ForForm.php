@@ -98,7 +98,8 @@ else {
   else {
     setcookie('limbs_value', $_POST['limbs']);
 
-setcookie('biography_value', $_POST['Biography']);
+ if(!empty($_POST['bio'])){
+    setcookie ('biography_value', $_POST['bio']
 
  if ($errors) {
     header('Location: form.php');
@@ -121,8 +122,8 @@ setcookie('biography_value', $_POST['Biography']);
   try {
       $stmt = $db->prepare("INSERT INTO application SET fio = ?, email = ?, birth_date = ? ,gender = ?, limb = ?, bio = ?");
       $stmt -> execute(array($_POST['FIO'],$_POST['email'],$_POST['date'],$_POST['sex'],$_POST['limbs'],$_POST['Biography']));
-      $st = $db->prepare("INSERT INTO application SET fio = ?, email = ?, ,ability =?");
-      $st -> execute(array($_POST['FIO'],$_POST['email'],$power));
+      $stmt = $db->prepare("INSERT INTO abilities SET fio = ?, email = ?, ,ability =?");
+      $stmt -> execute(array($_POST['FIO'],$_POST['email'],$power));
   }
   catch(PDOException $e){
       print('Error : ' . $e->getMessage());
@@ -131,7 +132,7 @@ setcookie('biography_value', $_POST['Biography']);
 
   setcookie('save', '1');
 
-  header('Location: index.php');
+  header('Location: ForForm.php');
 }
 };
 
